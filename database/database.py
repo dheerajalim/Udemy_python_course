@@ -19,12 +19,16 @@ def create_table():
 
 
 def add_new_book(name,author):
-    create_table()
-    conn = establish_connection("data.db")
-    conn[0].execute("Insert into books values(? , ? , 0)", (name, author))
+    try:
+        create_table()
+        conn = establish_connection("data.db")
+        conn[0].execute("Insert into books values(? , ? , 0)", (name, author))
 
-    conn[1].commit()
-    conn[1].close()
+        conn[1].commit()
+        conn[1].close()
+
+    except Exception as e:
+        print(e)
 
 
 def list_all_books():
